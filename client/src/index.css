@@ -1,0 +1,111 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    color-scheme: light;
+  }
+  .dark {
+    color-scheme: dark;
+  }
+  html {
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+  body {
+    @apply bg-canvas text-body font-sans antialiased dark:bg-ink-950 dark:text-ink-100;
+  }
+  ::selection {
+    @apply bg-gold/30 text-ink-900;
+  }
+  * {
+    scrollbar-width: thin;
+    scrollbar-color: #c5cdd9 transparent;
+  }
+  .dark * {
+    scrollbar-color: #364a62 transparent;
+  }
+  input,
+  select,
+  textarea,
+  button {
+    font: inherit;
+  }
+  :focus-visible {
+    @apply outline-none ring-2 ring-gold/60 ring-offset-2 ring-offset-canvas dark:ring-offset-ink-950;
+  }
+}
+
+@layer components {
+  .container-page {
+    @apply mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8;
+  }
+  .surface {
+    @apply rounded-2xl border border-line bg-white shadow-soft dark:border-ink-800 dark:bg-ink-900;
+  }
+  .surface-muted {
+    @apply rounded-2xl border border-line bg-white/70 dark:border-ink-800 dark:bg-ink-900/60;
+  }
+  .eyebrow {
+    @apply text-[11px] font-semibold uppercase tracking-[0.22em] text-gold-600 dark:text-gold-300;
+  }
+  .display {
+    @apply font-display tracking-tight text-ink-900 dark:text-white;
+  }
+  .link-underline {
+    @apply relative after:absolute after:-bottom-0.5 after:left-0 after:h-px after:w-0 after:bg-current after:transition-all hover:after:w-full;
+  }
+  .skeleton {
+    @apply relative overflow-hidden rounded-lg bg-ink-100 dark:bg-ink-800;
+  }
+  .skeleton::after {
+    content: '';
+    @apply absolute inset-0 -translate-x-full animate-shimmer bg-gradient-to-r from-transparent via-white/60 to-transparent dark:via-white/10;
+  }
+  .prose-hilaal {
+    @apply text-[15px] leading-7 text-ink-600 dark:text-ink-200;
+  }
+  .prose-hilaal p {
+    @apply mb-4;
+  }
+  .prose-hilaal h2 {
+    @apply mb-3 mt-8 font-display text-2xl text-ink-900 dark:text-white;
+  }
+  .prose-hilaal h3 {
+    @apply mb-2 mt-6 text-lg font-semibold text-ink-900 dark:text-white;
+  }
+  .prose-hilaal ul {
+    @apply mb-4 list-disc space-y-1 pl-5;
+  }
+}
+
+@layer utilities {
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+  .no-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+  .text-balance {
+    text-wrap: balance;
+  }
+  .grain {
+    background-image: radial-gradient(rgba(16, 28, 44, 0.045) 1px, transparent 1px);
+    background-size: 18px 18px;
+  }
+  .dark .grain {
+    background-image: radial-gradient(rgba(255, 255, 255, 0.035) 1px, transparent 1px);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
